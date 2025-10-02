@@ -18,17 +18,17 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: 6ffbaaad7b4ac6e1afabed19a80b2560.dir
-      size: 0
-      nfiles: 1
+      md5: b23c5b4dac6fd0f0b6804c4d96dff9a1.dir
+      size: 150817718
+      nfiles: 3
   train_model:
     cmd: python src/models/train_model.py data/processed/
     deps:
     - path: data/processed/
       hash: md5
-      md5: 6ffbaaad7b4ac6e1afabed19a80b2560.dir
-      size: 0
-      nfiles: 1
+      md5: b23c5b4dac6fd0f0b6804c4d96dff9a1.dir
+      size: 150817718
+      nfiles: 3
     - path: src/models/train_model.py
       hash: md5
       md5: e27724cb0d667b8c1a383c22b6a706a0
@@ -36,6 +36,29 @@ stages:
     outs:
     - path: models/
       hash: md5
-      md5: 6ffbaaad7b4ac6e1afabed19a80b2560.dir
-      size: 0
-      nfiles: 1
+      md5: 0e20d3697d1c9701da9107c75127d4eb.dir
+      size: 399465
+      nfiles: 2
+  visualize:
+    cmd: python src/visualization/visualize.py models/model.joblib 
+      data/processed/
+    deps:
+    - path: data/processed/
+      hash: md5
+      md5: b23c5b4dac6fd0f0b6804c4d96dff9a1.dir
+      size: 150817718
+      nfiles: 3
+    - path: models/model.joblib
+      hash: md5
+      md5: 8d6ec74a013d3c552212d6d363767610
+      size: 399465
+    - path: src/visualization/visualize.py
+      hash: md5
+      md5: c5ddd9d257bcd68f1c9a95366b3e1e61
+      size: 3569
+    outs:
+    - path: dvclive
+      hash: md5
+      md5: 0803303bbf62e669b272d278c3cdc22d.dir
+      size: 18828425
+      nfiles: 8

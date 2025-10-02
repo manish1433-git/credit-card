@@ -1,27 +1,29 @@
 stages:
   make_dataset:
-    cmd: /opt/miniconda3/envs/jup_env/bin/python /Users/manishpriyadarshan/Codes/credit_card/credit-card/src/data/make_dataset.py /data/raw/creditcard.csv
+    cmd: python src/data/make_dataset.py data/raw/creditcard.csv
     deps:
-    - /data/raw/creditcard.csv
-    - /src/data/make_dataset.py
+    - data/raw/creditcard.csv
+    - src/data/make_dataset.py
     params:
     - make_dataset.test_split
     - make_dataset.seed
     outs:
-    - /data/processed/
+    - data/processed/
+
   train_model:
-    cmd: /opt/miniconda3/envs/jup_env/bin/python /src/models/train_model.py /data/processed/
+    cmd: python src/models/train_model.py data/processed/
     deps:
-    - /data/processed/
-    - /src/models/train_model.py
+    - data/processed/
+    - src/models/train_model.py
     outs:
-    - /models/
+    - models/
+
   visualize:
-    cmd: /opt/miniconda3/envs/jup_env/bin/python /src/visualization/visualize.py /models/model.joblib /data/processed/
+    cmd: python src/visualization/visualize.py models/model.joblib data/processed/
     deps:
-    - /data/processed/
-    - /models/model.joblib
-    - /src/visualization/visualize.py
+    - data/processed/
+    - models/model.joblib
+    - src/visualization/visualize.py
     outs:
     - dvclive
 
