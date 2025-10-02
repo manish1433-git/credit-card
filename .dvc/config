@@ -1,0 +1,4 @@
+[core]
+    remote = credit-dvc
+['remote "credit-dvc"']
+    url = /tmp/credit-dvc

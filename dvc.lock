@@ -1,12 +1,12 @@
 schema: '2.0'
 stages:
   make_dataset:
-    cmd: python src/data/make_dataset.py data/raw/creditcard.csv
+    cmd: python src/data/make_dataset.py /data/raw/creditcard.csv
     deps:
     - path: data/raw/creditcard.csv
       hash: md5
-      md5: e90efcb83d69faf99fcab8b0255024de
-      size: 150828752
+      md5: c53a15bb0ec5f7a102c672e30b5dadec
+      size: 150827702
     - path: src/data/make_dataset.py
       hash: md5
       md5: 6c21118256e4709dbab14a53c1ffbcb3
@@ -18,17 +18,17 @@ stages:
     outs:
     - path: data/processed/
       hash: md5
-      md5: b23c5b4dac6fd0f0b6804c4d96dff9a1.dir
-      size: 150817718
-      nfiles: 3
+      md5: eaf21073148258d69645e0d3cdb75a16.dir
+      size: 150816670
+      nfiles: 2
   train_model:
-    cmd: python src/models/train_model.py data/processed/
+    cmd: python src/models/train_model.py /data/processed/
     deps:
     - path: data/processed/
       hash: md5
-      md5: b23c5b4dac6fd0f0b6804c4d96dff9a1.dir
-      size: 150817718
-      nfiles: 3
+      md5: eaf21073148258d69645e0d3cdb75a16.dir
+      size: 150816670
+      nfiles: 2
     - path: src/models/train_model.py
       hash: md5
       md5: e27724cb0d667b8c1a383c22b6a706a0
@@ -41,13 +41,13 @@ stages:
       nfiles: 2
   visualize:
     cmd: python src/visualization/visualize.py models/model.joblib 
-      data/processed/
+      /data/processed/
     deps:
     - path: data/processed/
       hash: md5
-      md5: b23c5b4dac6fd0f0b6804c4d96dff9a1.dir
-      size: 150817718
-      nfiles: 3
+      md5: eaf21073148258d69645e0d3cdb75a16.dir
+      size: 150816670
+      nfiles: 2
     - path: models/model.joblib
       hash: md5
       md5: 8d6ec74a013d3c552212d6d363767610
