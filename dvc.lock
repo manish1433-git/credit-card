@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/raw/creditcard.csv
       hash: md5
-      md5: a36d113b0174447229545542c474358c
-      size: 150824536
+      md5: 13fa757432edc7dc714b9b12c9c1eb65
+      size: 150823488
     - path: src/data/make_dataset.py
       hash: md5
       md5: 6c21118256e4709dbab14a53c1ffbcb3
