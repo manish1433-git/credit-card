@@ -9,7 +9,7 @@ WORKDIR /app
 RUN echo $(ls -ltrh)
 COPY app.py /app/app.py
 RUN mkdir models
-COPY models/model.joblib /app/models/model.joblib
+COPY model.joblib /app/models/model.joblib
 COPY requirements.txt /app/requirements.txt
 
 
