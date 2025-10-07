@@ -3,7 +3,7 @@ name: pipeline
 on:
   push
 
-permission:
+permissions:
     id-token: write
     contents: read
 
