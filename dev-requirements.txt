@@ -1,0 +1,10 @@
+fast-api
+scikit-learn
+pandas
+numpy
+joblib
+matplotlib
+uvicorn
+sagemaker
+pykernel
+boto3

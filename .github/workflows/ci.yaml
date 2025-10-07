@@ -1,0 +1,52 @@
+name: pipeline
+
+on:
+  push
+
+permission:
+    id-token: write
+    contents: read
+
+jobs:
+  integration:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+  docker_build:
+    name: docker build and push to ecr
+    needs: integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkut code
+        uses: actions/checkout@v3
+
+      - name: Install utilities
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq unzip -y
+
+      - name: onfigure aws creds
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-secret-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: build, tag, push image to ecr
+        id: build-image
+        env: 
+          ECR_REGISTRY: ${{ secrets.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}
+          IMAGE_TAG: latest
+        run:
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
